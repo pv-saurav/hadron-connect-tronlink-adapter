@@ -59,7 +59,7 @@ export class TronLinkAdapter extends EventEmitter {
   private async waitForProvider(retries = 10, delay = 300): Promise<void> {
     for (let i = 0; i < retries; i++) {
       const w = typeof window !== "undefined" ? window : undefined;
-      if (w?.tronLink && w.tronLink?.ready && w.tronLink.tronWeb) {
+      if (w?.tronLink) {
         this.provider = w.tronLink;
         this.readyState = WalletReadyState.Found;
         this.adapterState = AdapterState.Disconnect;
@@ -115,7 +115,7 @@ export class TronLinkAdapter extends EventEmitter {
 
       if (res.code === 4001) {
         throw new WalletConnectionError("The user rejected connection.");
-      }
+      } 
       this.address =  this.provider.tronWeb.defaultAddress.base58;
       const { chainId, networkType } = await this.getChainInfo();
       this.chainId = chainId;
