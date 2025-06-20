@@ -1,5 +1,5 @@
 {
-  "name": "hadron-connect-tronlink-adapter",
+  "name": "@hadron-connect/tronlink-adapter",
   "version": "1.0.0",
   "description": "This package provides an adapter to enable DApps to connect metamask",
   "main": "lib/index.js",
