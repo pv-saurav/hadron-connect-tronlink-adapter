@@ -1,0 +1,33 @@
+{
+  "name": "hadron-connect-tronlink-adapter",
+  "version": "1.0.0",
+  "description": "This package provides an adapter to enable DApps to connect metamask",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@hadron-connect/abstract-adapter": "github:Hadron-Tokenization/hadron-connect-abstract-adapter",
+    "eventemitter3": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pv-saurav/hadron-connect-tronlink-adapter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pv-saurav/hadron-connect-tronlink-adapter/issues"
+  },
+  "homepage": "https://github.com/pv-saurav/hadron-connect-tronlink-adapter#readme"
+}

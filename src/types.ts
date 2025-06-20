@@ -1,0 +1,64 @@
+export enum NetworkType {
+  Mainnet = "Mainnet",
+  Shasta = "Shasta",
+  Nile = "Nile",
+  Unknown = "Unknown",
+}
+
+export enum WalletReadyState {
+  Loading = "Loading",
+  NotFound = "NotFound",
+  Found = "Found",
+}
+
+export enum AdapterState {
+  Loading = "Loading",
+  NotFound = "NotFound",
+  Disconnect = "Disconnected",
+  Connected = "Connected",
+}
+
+
+export interface WatchAssetParams {
+  type: "TRC10" | "TRC20" | "TRC721";
+  options: {
+    address: string;
+    symbol?: string;
+    decimals?: number;
+    image?: string;
+    tokenId?: string;
+  };
+}
+
+export interface TronWeb {
+  trx: {
+    sign: (data: unknown) => Promise<string>;
+    sendRawTransaction: (
+      signed: string | object
+    ) => Promise<{ txid?: string; result: boolean }>;
+    getBlockByNumber: (n: number) => Promise<{ blockID?: string }>;
+  };
+  transactionBuilder: {
+    sendTrx: (to: string, amount: number, from: string) => Promise<object>;
+  };
+  request?: (args: { method: string; params?: unknown }) => Promise<unknown>;
+  fullNode?: { host: string };
+  solidityNode?: { host: string };
+  eventServer?: { host: string };
+}
+
+export interface TronProvider {
+  request: (args: { method: string; params?: unknown }) => Promise<unknown>;
+  tronWeb: TronWeb;
+}
+
+
+export interface TronLinkMessageData {
+  isTronLink?: boolean;
+  message?: {
+    action?: string;
+    data?: unknown;
+  };
+}
+
+
