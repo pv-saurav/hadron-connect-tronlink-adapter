@@ -18,6 +18,10 @@ export enum AdapterState {
   Connected = "Connected",
 }
 
+export interface TronResponse {
+  code:number,
+  message:string
+}
 
 export interface WatchAssetParams {
   type: "TRC10" | "TRC20" | "TRC721";
@@ -42,16 +46,26 @@ export interface TronWeb {
     sendTrx: (to: string, amount: number, from: string) => Promise<object>;
   };
   request?: (args: { method: string; params?: unknown }) => Promise<unknown>;
+  defaultAddress: {
+    base58:string,
+    hex:string,
+    name:string,
+    type:number
+  };
   fullNode?: { host: string };
   solidityNode?: { host: string };
   eventServer?: { host: string };
 }
 
 export interface TronProvider {
-  request: (args: { method: string; params?: unknown }) => Promise<unknown>;
+  request: (args: { method: string; params?: unknown }) => Promise<unknown >;
   tronWeb: TronWeb;
+  ready:boolean;
+  tronlinkParams:{
+    websiteIcon:string,
+    websiteName:string,
+  }
 }
-
 
 export interface TronLinkMessageData {
   isTronLink?: boolean;
