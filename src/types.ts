@@ -30,7 +30,6 @@ export interface WatchAssetParams {
     symbol?: string;
     decimals?: number;
     image?: string;
-    tokenId?: string;
   };
 }
 

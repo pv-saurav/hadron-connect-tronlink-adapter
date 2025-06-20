@@ -92,7 +92,6 @@ export class TronLinkAdapter extends EventEmitter {
   }
 
   async connect(): Promise<string> {
-    console.log(this.provider)
     this.assertProvider();
     try {
       const res: any = await this.provider.request({
@@ -125,7 +124,6 @@ export class TronLinkAdapter extends EventEmitter {
       this.emit("connect", this.address);
       return this.address;
     } catch (err) {
-      console.log(err);
       const err_message =
         err && typeof err === "object" && "message" in err
           ? (err as Error).message
