@@ -51,7 +51,8 @@ export class TronLinkAdapter extends EventEmitter {
     for (let i = 0; i < retries; i++) {
       const w = typeof window !== "undefined" ? window : undefined;
       if (w?.tron || w?.tronLink) {
-        this.provider = w.tron ?? w.tronLink;
+        this.provider = w.tron ??  w.tronLink;
+        console.log("this.provider = w.tron ?? w.tronLink;", w.tron,w.tronLink)
         this.readyState = WalletReadyState.Found;
         this.adapterState = AdapterState.Disconnect;
         if (!w.tron && w.tronLink) {
@@ -80,6 +81,7 @@ export class TronLinkAdapter extends EventEmitter {
   async connect(): Promise<string> {
     this.assertProvider();
     try {
+      console.log("this.provider---------------->",this.provider)
       const res = await this.provider.request({ method: "tron_requestAccounts" });
       console.log(res)
       const accounts = (await this.provider.request({ method: "tron_accounts" })) as string[];
@@ -95,7 +97,8 @@ export class TronLinkAdapter extends EventEmitter {
       return this.address;
     } catch (err) {
       console.log(err)
-      throw new WalletConnectionError("Failed to connect to TronLink wallet", err);
+      const err_message = err && typeof err === "object" && "message" in err ? (err as Error).message : "Failed to connect to TronLink wallet";
+      throw new WalletConnectionError(err_message, err);
     }
   }
 
