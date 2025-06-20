@@ -80,8 +80,10 @@ export class TronLinkAdapter extends EventEmitter {
   async connect(): Promise<string> {
     this.assertProvider();
     try {
-      await this.provider.request({ method: "tron_requestAccounts" });
+      const res = await this.provider.request({ method: "tron_requestAccounts" });
+      console.log(res)
       const accounts = (await this.provider.request({ method: "tron_accounts" })) as string[];
+      console.log(accounts)
       if (!accounts?.length) throw new WalletNotSelectedError("No Tron account returned");
       this.address = accounts[0];
       const { chainId, networkType } = await this.getChainInfo();
@@ -92,6 +94,7 @@ export class TronLinkAdapter extends EventEmitter {
       this.emit("connect", this.address);
       return this.address;
     } catch (err) {
+      console.log(err)
       throw new WalletConnectionError("Failed to connect to TronLink wallet", err);
     }
   }
